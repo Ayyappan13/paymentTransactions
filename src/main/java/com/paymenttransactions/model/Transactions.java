@@ -46,11 +46,9 @@ public class Transactions {
 	//@DateTimeFormat(pattern = "HH-mm-ss")
 	private Date transactionTime;
 	
-	
 	public Date getTransactionDate() {
 		return transactionDate;
 	}
-
 
 	public Date getTransactionTime() {
 		return transactionTime;
@@ -60,22 +58,17 @@ public class Transactions {
 		this.transactionDate = transactionDate;
 	}
 
-
 	public void setTransactionTime(Date transactionTime) {
 		this.transactionTime = transactionTime;
 	}
 
-
-	
 	public Integer getId() {
 		return id;
 	}
 
-
 	public String getUserId() {
 		return userId;
 	}
-
 
 	public String getTransactionType() {
 		return transactionType;

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
-import org.apache.tomcat.util.json.JSONParser
 import spock.lang.Specification
 
 class JsonUtil extends Specification {

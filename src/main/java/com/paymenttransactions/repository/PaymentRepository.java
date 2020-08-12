@@ -23,5 +23,4 @@ public interface PaymentRepository extends JpaRepository<Transactions, Integer>{
 	
 	List<Transactions>findAllByUserIdAndTransactionTypeIgnoreCase(String userId, String transactionType);
 
-	
 }

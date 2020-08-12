@@ -36,34 +36,17 @@ public class PaymentTransactionController {
 	
 	private static final Logger log = LoggerFactory.getLogger(PaymentTransactionController.class);
 
-	//private PaymentTransactionService paymentTransactionService;
-
-/*	@Autowired
-	public PaymentTransactionController(PaymentTransactionService paymentTransactionService){
-		this.paymentTransactionService = paymentTransactionService;
-	}*/
-
 	@Autowired
 	private PaymentTransactionService paymentTransactionService;
 
 	@GetMapping("/retrieveAllPaymentTransactions")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	//public List<Transactions> retrieveAllPaymentTransactions(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
 	public ResponseEntity<?> retrieveAllPaymentTransactions(@Param("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
 
 		MDC.put("Resource", RETRIEVE_ALL_PAYMENT_TRANSACTIONS);
-
 		log.info("retrieveAllPaymentTransactions : {}",date);
 		
 		List<Transactions> transactions = paymentTransactionService.getAllPaymentTransactions(date);
-
-		//ResponseEntity<List<Transactions>> responseEntity;
-
-		//ResponseEntity.status(HttpStatus.OK).body(transactions);
-
-
-		//return (ResponseEntity<List<Transactions>>) transactions;
-		//return ResponseEntity.created(location).body(transactions);
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
 	}
 
@@ -72,12 +55,9 @@ public class PaymentTransactionController {
 	public ResponseEntity<?> retrievePaymentTransactionsByUserId(@Param("userid") String userId) {
 
 		MDC.put("Resource", RETRIEVE_PAYMENT_TRANSACTIONS_BY_USER_ID);
-
 		log.info("retrievePaymentTransactionsByUserId : {}",userId);
 		
 		List<Transactions> transactions = paymentTransactionService.getPaymentTransactionsByUserId(userId);
-		 
-		//return transactions;
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
 	}	
 	
@@ -89,7 +69,6 @@ public class PaymentTransactionController {
 		log.info("retrievePaymentTransactionsByUserIdAndTransactionType : {}, {}",userId,transactionType);
 		
 		List<Transactions> transactions = paymentTransactionService.getPaymentTransactionsByUserIdAndTransactionType(userId, transactionType);
-
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
 	}
 	
@@ -101,7 +80,6 @@ public class PaymentTransactionController {
 		log.info("retrievePaymentTransactionsByTransactionType : {}",transactionType);
 		
 		List<Transactions> transactions = paymentTransactionService.getPaymentTransactionsByTransactionType(transactionType);
-
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
 	}	
 
@@ -115,9 +93,6 @@ public class PaymentTransactionController {
 		log.info("createPaymentTransactions");
 		
 		Transactions transacationSuccess = paymentTransactionService.createPaymentTransactions(transactions);
-		
-		//return new ResponseEntity<>("User - "+transacationSuccess.getUserId()+" transaction is success",HttpStatus.CREATED);
-
 		return new ResponseEntity<>("User "+transacationSuccess.getUserId()+" is successfully created", HttpStatus.CREATED);
 		
 	}

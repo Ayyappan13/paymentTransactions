@@ -1,22 +1,12 @@
 package com.paymentTransactions.service
 
 import com.paymentTransactions.util.DataUtil
-import com.paymenttransactions.controller.PaymentTransactionController
 import com.paymenttransactions.model.Transactions
 import com.paymenttransactions.repository.PaymentRepository
 import com.paymenttransactions.service.PaymentTransactionService
-import com.sun.xml.internal.ws.api.ha.StickyFeature
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 
-import javax.servlet.http.HttpServletRequest
-
-import static org.springframework.http.MediaType.APPLICATION_JSON
-import static org.springframework.http.MediaType.APPLICATION_JSON
-import static org.springframework.http.MediaType.APPLICATION_XML
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup
 
 class PaymentTransactionServiceTest extends Specification{

@@ -4,24 +4,12 @@ import com.paymentTransactions.util.DataUtil
 import com.paymentTransactions.util.JsonUtil
 import com.paymenttransactions.controller.PaymentTransactionController
 import com.paymenttransactions.model.Transactions
-import com.paymenttransactions.repository.PaymentRepository
 import com.paymenttransactions.service.PaymentTransactionService
-import net.minidev.json.JSONUtil
-import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.servlet.http.HttpServletRequest
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-
-import static org.springframework.http.MediaType.APPLICATION_XML
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
