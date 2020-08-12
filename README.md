@@ -10,7 +10,7 @@ The Payment Transactions application is a collection of resources for building R
 
 ## Steps
  - Download application from below GitHug link and import as Maven project.
-   - <GitHub>
+   - https://github.com/Ayyappan13/paymentTransactions
  - After successfully imported, run the application
  - data.sql file would be executed and insert set of records into "Transacations" table in H2 Inbuild Database.
     -  http://localhost:8080/h2-console
