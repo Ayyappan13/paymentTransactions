@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scanPeriod="30 seconds" scan="true">
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="LOG_PATH" source="logging.file" />
+
+      <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+          <providers>
+            <pattern>
+              <pattern>
+                { "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                "level": "%5p",
+                "service": "${springAppName}",
+                "TraceId": "%X{X-B3-TraceId}",
+                "x-api-id": "%X{x-api-id}",
+                "Resource": "%X{Resource}",
+                "class":"%class.%M %L",
+                "message":"%m%n"}
+              </pattern>
+            </pattern>
+            <!--<provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider"/>-->
+            <arguments>
+              <includeStructuredArguments>true</includeStructuredArguments>
+            </arguments>
+          </providers>
+        </encoder>
+
+      </appender>
+
+      <appender name="asyncAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="consoleAppender"/>
+      </appender>
+
+
+        <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+          <file>${LOG_PATH}/${springAppName}.log</file>
+          <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <!--<encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+            <providers>
+              <pattern>
+                <pattern>
+                  { "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                  "level": "%5p",
+                  "service": "${springAppName}",
+                  "TraceId": "%X{X-B3-TraceId}",
+                  "x-api-id": "%X{x-api-id}",
+                  "Resource": "%X{Resource}",
+                  "class":"%class.%M %L",
+                  "message":"%m%n"}
+                </pattern>
+              </pattern>
+              <!--<provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider"/>-->
+              <arguments>
+                <includeStructuredArguments>true</includeStructuredArguments>
+              </arguments>
+            </providers>
+          </encoder>
+
+          <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${springAppName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <!-- keep 30 days' worth of history capped at 1GB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+          </rollingPolicy>
+        </appender>
+    
+    
+      <root>
+        <level value="INFO"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppender"/>
+<!--        <appender-ref ref="asyncAppender"/>-->
+      </root>
+
+</configuration>
